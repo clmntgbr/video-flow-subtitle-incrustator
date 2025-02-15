@@ -13,7 +13,8 @@ class ProtobufConverter:
         video.size = int(media_pod_data["originalVideo"]["size"])
         video.audios.extend(media_pod_data["originalVideo"]["audios"])
         video.subtitles.extend(media_pod_data["originalVideo"]["subtitles"])
-        
+        video.subtitle = media_pod_data["originalVideo"]["subtitle"]
+
         media_pod = MediaPod()
         media_pod.uuid = media_pod_data["uuid"]
         media_pod.userUuid = media_pod_data["userUuid"]

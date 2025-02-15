@@ -13,7 +13,7 @@ services:
             - api_network
         volumes:
             - ./:/app
-        command: celery -A src.main.celery worker --loglevel=info --queues=api_to_subtitle_merger
+        command: celery -A src.main.celery worker --loglevel=info --queues=api_to_subtitle_incrustator
         ports:
             - "5003:5000"
 
