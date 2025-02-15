@@ -21,11 +21,11 @@ message SubtitleGeneratorToApi {
     MediaPod mediaPod = 1;
 }
 
-message ApiToSubtitleMerger {
+message ApiToSubtitleIncrustator {
     MediaPod mediaPod = 1;
 }
 
-message SubtitleMergerToApi {
+message SubtitleIncrustatorToApi {
     MediaPod mediaPod = 1;
 }
 

@@ -1,9 +1,9 @@
 import json
-from src.Protobuf.Message_pb2 import ApiToSubtitleMerger, MediaPod, Video
+from src.Protobuf.Message_pb2 import ApiToSubtitleIncrustator, MediaPod, Video
 
 class ProtobufConverter:
     @staticmethod
-    def json_to_protobuf(message: str) -> ApiToSubtitleMerger:
+    def json_to_protobuf(message: str) -> ApiToSubtitleIncrustator:
         data = json.loads(message)
         media_pod_data = data["mediaPod"]
 
@@ -20,7 +20,7 @@ class ProtobufConverter:
         media_pod.status = media_pod_data["status"]
         media_pod.originalVideo.CopyFrom(video)
 
-        proto_message = ApiToSubtitleMerger()
+        proto_message = ApiToSubtitleIncrustator()
         proto_message.mediaPod.CopyFrom(media_pod)
 
         return proto_message
