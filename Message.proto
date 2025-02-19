@@ -29,6 +29,14 @@ message SubtitleMergerToApi {
     MediaPod mediaPod = 1;
 }
 
+message ApiToSubtitleTransformer {
+    MediaPod mediaPod = 1;
+}
+
+message SubtitleTransformerToApi {
+    MediaPod mediaPod = 1;
+}
+
 message ApiToSubtitleIncrustator {
     MediaPod mediaPod = 1;
 }
@@ -37,12 +45,55 @@ message SubtitleIncrustatorToApi {
     MediaPod mediaPod = 1;
 }
 
+enum MediaPodStatus {
+    UPLOAD_COMPLETE = 0;
+
+    SOUND_EXTRACTOR_PENDING = 1;
+    SOUND_EXTRACTOR_COMPLETE = 2;
+    SOUND_EXTRACTOR_ERROR = 3;
+
+    SUBTITLE_GENERATOR_PENDING = 4;
+    SUBTITLE_GENERATOR_COMPLETE = 5;
+    SUBTITLE_GENERATOR_ERROR = 6;
+
+    SUBTITLE_MERGER_PENDING = 7;
+    SUBTITLE_MERGER_COMPLETE = 8;
+    SUBTITLE_MERGER_ERROR = 9;
+
+    SUBTITLE_TRANSFORMER_PENDING = 10;
+    SUBTITLE_TRANSFORMER_COMPLETE = 11;
+    SUBTITLE_TRANSFORMER_ERROR = 12;
+
+    SUBTITLE_INCRUSTATOR_PENDING = 13;
+    SUBTITLE_INCRUSTATOR_COMPLETE = 14;
+    SUBTITLE_INCRUSTATOR_ERROR = 15;
+
+    RESIZING = 16;
+    RESIZED = 17;
+
+    READY_FOR_EXPORT = 18;
+    ERROR = 19;
+}
+
+enum PresetSubtitleShadow {
+    NONE = 0;
+    SOFT = 1;
+    HARD = 2;
+}
+
+enum PresetSubtitleFont {
+    ARIAL = 0;
+    TIMES_NEW_ROMAN = 1;
+    COURIER_NEW = 2;
+}
+
 message MediaPod {
     string uuid = 1;
     string userUuid = 2;
     Video originalVideo = 3;
     Video video = 4;
     string status = 5;
+    Preset preset = 6;
 }
 
 message Video {
@@ -51,14 +102,20 @@ message Video {
     int64 size = 3;
     int64 length = 4;
     string subtitle = 5;
-    repeated string subtitles = 6;
-    repeated string audios = 7;
-    Preset preset = 8;
+    string ass = 6;
+    repeated string subtitles = 7;
+    repeated string audios = 8;
 }
 
 message Preset {
     string subtitleFont = 1;
     string subtitleSize = 2;
     string subtitleColor = 3;
-    string videoFormat = 4;
+    string subtitleBackground = 4;
+    string subtitleOutlineColor = 5;
+    string subtitleOutlineThickness = 6;
+    string subtitleShadow = 7;
+    string subtitleShadowColor = 8;
 }
+
+
