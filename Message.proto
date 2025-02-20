@@ -76,9 +76,17 @@ enum MediaPodStatus {
 }
 
 enum PresetSubtitleShadow {
-    NONE = 0;
-    SOFT = 1;
-    HARD = 2;
+    SHADOW_NONE = 0;
+    SHADOW_SOFT = 1;
+    SHADOW_MEDIUM = 2;
+    SHADOW_HARD = 4;
+}
+
+enum PresetSubtitleOutlineThickness{
+    OUTLINE_NONE = 0;
+    OUTLINE_SOFT = 1;
+    OUTLINE_MEDIUM = 2;
+    OUTLINE_HARD = 4;
 }
 
 enum PresetSubtitleFont {
@@ -111,11 +119,13 @@ message Preset {
     string subtitleFont = 1;
     string subtitleSize = 2;
     string subtitleColor = 3;
-    string subtitleBackground = 4;
-    string subtitleOutlineColor = 5;
-    string subtitleOutlineThickness = 6;
-    string subtitleShadow = 7;
-    string subtitleShadowColor = 8;
+    string subtitleBold = 4;
+    string subtitleItalic = 5;
+    string subtitleUnderline = 6;
+    string subtitleOutlineColor = 7;
+    string subtitleOutlineThickness = 8;
+    string subtitleShadow = 9;
+    string subtitleShadowColor = 10;
 }
 
 

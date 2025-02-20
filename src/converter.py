@@ -14,6 +14,7 @@ class ProtobufConverter:
         video.audios.extend(media_pod_data["originalVideo"]["audios"])
         video.subtitles.extend(media_pod_data["originalVideo"]["subtitles"])
         video.subtitle = media_pod_data["originalVideo"]["subtitle"]
+        video.ass = media_pod_data["originalVideo"]["ass"]
 
         video.IsInitialized()
 
@@ -21,7 +22,9 @@ class ProtobufConverter:
         preset.subtitleFont = media_pod_data["preset"]["subtitleFont"]
         preset.subtitleSize = media_pod_data["preset"]["subtitleSize"]
         preset.subtitleColor = media_pod_data["preset"]["subtitleColor"]
-        preset.subtitleBackground = media_pod_data["preset"]["subtitleBackground"]
+        preset.subtitleBold = media_pod_data["preset"]["subtitleBold"]
+        preset.subtitleItalic = media_pod_data["preset"]["subtitleItalic"]
+        preset.subtitleUnderline = media_pod_data["preset"]["subtitleUnderline"]
         preset.subtitleOutlineColor = media_pod_data["preset"]["subtitleOutlineColor"]
         preset.subtitleOutlineThickness = media_pod_data["preset"]["subtitleOutlineThickness"]
         preset.subtitleShadow = media_pod_data["preset"]["subtitleShadow"]
