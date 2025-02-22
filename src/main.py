@@ -56,7 +56,10 @@ def process_message(message):
             raise Exception
         
         ffmpeg.input(tmpVideoFilePath).output(
-            tmpProcessedVideoFilePath, vf=f"subtitles={tmpAssFilePath}", c="libx264", crf=23
+            tmpProcessedVideoFilePath, 
+            vf=f"subtitles={tmpAssFilePath}", 
+            vcodec="libx264", 
+            preset="fast"
         ).run()
 
         if not s3_client.upload_file(tmpProcessedVideoFilePath, keyVideoProcessed):
