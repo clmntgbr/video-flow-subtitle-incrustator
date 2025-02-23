@@ -37,19 +37,19 @@ message SubtitleTransformerToApi {
     MediaPod mediaPod = 1;
 }
 
-message ApiToSubtitleIncrustator {
-    MediaPod mediaPod = 1;
-}
-
-message SubtitleIncrustatorToApi {
-    MediaPod mediaPod = 1;
-}
-
 message ApiToVideoFormatter {
     MediaPod mediaPod = 1;
 }
 
 message VideoFormatterToApi {
+    MediaPod mediaPod = 1;
+}
+
+message ApiToSubtitleIncrustator {
+    MediaPod mediaPod = 1;
+}
+
+message SubtitleIncrustatorToApi {
     MediaPod mediaPod = 1;
 }
 
@@ -76,9 +76,9 @@ enum MediaPodStatus {
     SUBTITLE_INCRUSTATOR_COMPLETE = 14;
     SUBTITLE_INCRUSTATOR_ERROR = 15;
 
-    SUBTITLE_FORMATTER_PENDING = 16;
-    SUBTITLE_FORMATTER_COMPLETE = 17;
-    SUBTITLE_FORMATTER_ERROR = 18;
+    VIDEO_FORMATTER_PENDING = 16;
+    VIDEO_FORMATTER_COMPLETE = 17;
+    VIDEO_FORMATTER_ERROR = 18;
 
     RESIZING = 19;
     RESIZED = 20;
@@ -107,6 +107,11 @@ enum PresetSubtitleFont {
     COURIER_NEW = 2;
 }
 
+enum FormatStyle {
+    DEFAULT = 0;
+    ZOOMED_916 = 1;
+}
+
 message MediaPod {
     string uuid = 1;
     string userUuid = 2;
@@ -126,6 +131,7 @@ message Video {
     string ass = 6;
     repeated string subtitles = 7;
     repeated string audios = 8;
+    optional Format format = 9;
 }
 
 message Preset {
@@ -141,4 +147,6 @@ message Preset {
     string subtitleShadowColor = 10;
 }
 
-
+message Format {
+    string style = 1;
+}
