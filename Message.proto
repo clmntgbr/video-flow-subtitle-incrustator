@@ -107,8 +107,8 @@ enum PresetSubtitleFont {
     COURIER_NEW = 2;
 }
 
-enum FormatStyle {
-    DEFAULT = 0;
+enum VideoFormatStyle {
+    ORIGINAL = 0;
     ZOOMED_916 = 1;
 }
 
@@ -116,22 +116,21 @@ message MediaPod {
     string uuid = 1;
     string userUuid = 2;
     Video originalVideo = 3;
-    Video video = 4;
     string status = 5;
     Preset preset = 6;
     Video processedVideo = 7;
+    string format = 8;
 }
 
 message Video {
     string name = 1;
     string mimeType = 2;
     int64 size = 3;
-    int64 length = 4;
-    string subtitle = 5;
-    string ass = 6;
+    optional int64 length = 4;
+    optional string subtitle = 5;
+    optional string ass = 6;
     repeated string subtitles = 7;
     repeated string audios = 8;
-    optional Format format = 9;
 }
 
 message Preset {
@@ -145,8 +144,4 @@ message Preset {
     string subtitleOutlineThickness = 8;
     string subtitleShadow = 9;
     string subtitleShadowColor = 10;
-}
-
-message Format {
-    string style = 1;
 }
