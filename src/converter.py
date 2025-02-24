@@ -48,7 +48,7 @@ class ProtobufConverter:
                 processed_video.size = int(media_pod_data["processedVideo"]["size"])
 
             if "length" in media_pod_data["processedVideo"]:
-                processed_video.length = media_pod_data["processedVideo"]["length"]
+                processed_video.length = int(media_pod_data["processedVideo"]["length"])
 
             if "audios" in media_pod_data["processedVideo"]:
                 processed_video.audios.extend(media_pod_data["processedVideo"]["audios"])

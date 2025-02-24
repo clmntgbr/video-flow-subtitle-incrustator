@@ -43,13 +43,14 @@ def process_message(message):
 
     try:
         uuid = os.path.splitext(protobuf.mediaPod.originalVideo.name)[0]
+        type = os.path.splitext(protobuf.mediaPod.originalVideo.name)[1]
 
-        keyAss = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{protobuf.mediaPod.originalVideo.ass}"
-        keyVideo = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{protobuf.mediaPod.originalVideo.name}"
-        keyVideoProcessed = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{uuid}_processed.mp4"
+        keyAss = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{protobuf.mediaPod.processedVideo.ass}"
+        keyVideo = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{protobuf.mediaPod.processedVideo.name}"
+        keyVideoProcessed = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{uuid}_processed{type}"
 
-        tmpVideoFilePath = f"/tmp/{uuid}.mp4"
-        tmpProcessedVideoFilePath = f"/tmp/{uuid}_processed.mp4"
+        tmpVideoFilePath = f"/tmp/{uuid}{type}"
+        tmpProcessedVideoFilePath = f"/tmp/{uuid}_processed{type}"
         tmpAssFilePath = f"/tmp/{uuid}.ass"
 
         if not s3_client.download_file(keyAss, tmpAssFilePath):
@@ -68,12 +69,6 @@ def process_message(message):
         if not s3_client.upload_file(tmpProcessedVideoFilePath, keyVideoProcessed):
             raise Exception
         
-        video = Video()
-        video.name = f"{uuid}_processed.mp4"
-        video.mimeType = protobuf.mediaPod.originalVideo.mimeType
-        video.size = int(os.path.getsize(tmpProcessedVideoFilePath))
-
-        protobuf.mediaPod.processedVideo.CopyFrom(video)
         protobuf.mediaPod.status = MediaPodStatus.Name(MediaPodStatus.SUBTITLE_INCRUSTATOR_COMPLETE)
 
         file_client.delete_file(tmpAssFilePath)
@@ -82,7 +77,6 @@ def process_message(message):
 
         rmq_client.send_message(protobuf, "App\\Protobuf\\SubtitleIncrustatorToApi")
     except Exception as e:
-        print(e)
         protobuf.mediaPod.status = MediaPodStatus.Name(MediaPodStatus.SUBTITLE_INCRUSTATOR_ERROR)
         if not rmq_client.send_message(protobuf, "App\\Protobuf\\SubtitleIncrustatorToApi"):
             return False
