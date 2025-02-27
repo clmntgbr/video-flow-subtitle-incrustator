@@ -1,5 +1,5 @@
 import json
-from src.Protobuf.Message_pb2 import MediaPod, Video, Preset
+from src.Protobuf.Message_pb2 import MediaPod, Video, Configuration
 
 class ProtobufConverter:
     @staticmethod
@@ -10,7 +10,6 @@ class ProtobufConverter:
         media_pod = MediaPod()
         media_pod.uuid = media_pod_data["uuid"]
         media_pod.userUuid = media_pod_data["userUuid"]
-        media_pod.format = media_pod_data["format"]
 
         video = Video()
         video.name = media_pod_data["originalVideo"]["name"]
@@ -65,21 +64,22 @@ class ProtobufConverter:
             processed_video.IsInitialized()
             media_pod.processedVideo.CopyFrom(processed_video)
 
-        preset = Preset()
-        preset.subtitleFont = media_pod_data["preset"]["subtitleFont"]
-        preset.subtitleSize = media_pod_data["preset"]["subtitleSize"]
-        preset.subtitleColor = media_pod_data["preset"]["subtitleColor"]
-        preset.subtitleBold = media_pod_data["preset"]["subtitleBold"]
-        preset.subtitleItalic = media_pod_data["preset"]["subtitleItalic"]
-        preset.subtitleUnderline = media_pod_data["preset"]["subtitleUnderline"]
-        preset.subtitleOutlineColor = media_pod_data["preset"]["subtitleOutlineColor"]
-        preset.subtitleOutlineThickness = media_pod_data["preset"]["subtitleOutlineThickness"]
-        preset.subtitleShadow = media_pod_data["preset"]["subtitleShadow"]
-        preset.subtitleShadowColor = media_pod_data["preset"]["subtitleShadowColor"]
+        configuration = Configuration()
+        configuration.subtitleFont = media_pod_data["configuration"]["subtitleFont"]
+        configuration.subtitleSize = media_pod_data["configuration"]["subtitleSize"]
+        configuration.subtitleColor = media_pod_data["configuration"]["subtitleColor"]
+        configuration.subtitleBold = media_pod_data["configuration"]["subtitleBold"]
+        configuration.subtitleItalic = media_pod_data["configuration"]["subtitleItalic"]
+        configuration.subtitleUnderline = media_pod_data["configuration"]["subtitleUnderline"]
+        configuration.subtitleOutlineColor = media_pod_data["configuration"]["subtitleOutlineColor"]
+        configuration.subtitleOutlineThickness = media_pod_data["configuration"]["subtitleOutlineThickness"]
+        configuration.subtitleShadow = media_pod_data["configuration"]["subtitleShadow"]
+        configuration.subtitleShadowColor = media_pod_data["configuration"]["subtitleShadowColor"]
+        configuration.format = media_pod_data["configuration"]["format"]
 
-        preset.IsInitialized()
+        configuration.IsInitialized()
 
-        media_pod.preset.CopyFrom(preset)
+        media_pod.configuration.CopyFrom(configuration)
 
         media_pod.IsInitialized()
 

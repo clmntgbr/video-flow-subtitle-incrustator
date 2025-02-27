@@ -45,8 +45,8 @@ def process_message(message):
         uuid = os.path.splitext(protobuf.mediaPod.originalVideo.name)[0]
         type = os.path.splitext(protobuf.mediaPod.originalVideo.name)[1]
 
-        keyAss = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{protobuf.mediaPod.processedVideo.ass}"
-        keyVideo = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{protobuf.mediaPod.processedVideo.name}"
+        keyAss = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{uuid}.ass"
+        keyVideo = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{uuid}_processed{type}"
         keyVideoProcessed = f"{protobuf.mediaPod.userUuid}/{protobuf.mediaPod.uuid}/{uuid}_processed{type}"
 
         tmpVideoFilePath = f"/tmp/{uuid}{type}"
