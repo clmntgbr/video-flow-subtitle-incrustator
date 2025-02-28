@@ -1,5 +1,6 @@
 import os
 
+
 class FileClient:
     @staticmethod
     def delete_file(file_path: str) -> bool:

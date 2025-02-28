@@ -3,6 +3,7 @@ import json
 from src.config import Config
 from google.protobuf.json_format import MessageToJson
 
+
 class RabbitMQClient:
     @staticmethod
     def send_message(mediaPod, type: str) -> bool:
@@ -10,7 +11,7 @@ class RabbitMQClient:
             message = {
                 "task": "tasks.process_message",
                 "args": [MessageToJson(mediaPod)],
-                "queue": Config.RMQ_QUEUE_WRITE
+                "queue": Config.RMQ_QUEUE_WRITE,
             }
 
             parameters = pika.URLParameters(Config.RABBITMQ_URL)
@@ -18,14 +19,14 @@ class RabbitMQClient:
             channel = connection.channel()
 
             channel.basic_publish(
-                exchange='messages',
+                exchange="messages",
                 routing_key=Config.RMQ_QUEUE_WRITE,
                 body=json.dumps(message),
                 properties=pika.BasicProperties(
                     delivery_mode=2,
                     content_type="application/json",
-                    headers={"type": type}
-                )
+                    headers={"type": type},
+                ),
             )
 
             return True

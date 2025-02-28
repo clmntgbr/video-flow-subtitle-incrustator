@@ -12,3 +12,6 @@ kombu==5.4.2
 boto3==1.36.14
 python-dotenv==1.0.1
 ffmpeg-python==0.2.0
+black==25.1.0
+flake8==7.1.2
+ruff==0.9.9

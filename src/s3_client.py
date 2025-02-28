@@ -1,13 +1,14 @@
 import boto3
 
+
 class S3Client:
     def __init__(self, config):
         self.client = boto3.client(
-            's3',
+            "s3",
             aws_access_key_id=config.S3_ACCESS_KEY,
             aws_secret_access_key=config.S3_SECRET_KEY,
             endpoint_url=config.S3_ENDPOINT,
-            region_name=config.S3_REGION
+            region_name=config.S3_REGION,
         )
         self.bucket_name = config.S3_BUCKET_NAME
 

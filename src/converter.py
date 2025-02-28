@@ -1,6 +1,7 @@
 import json
 from src.Protobuf.Message_pb2 import MediaPod, Video, Configuration
 
+
 class ProtobufConverter:
     @staticmethod
     def json_to_protobuf(message: str) -> MediaPod:
@@ -15,7 +16,7 @@ class ProtobufConverter:
         video.name = media_pod_data["originalVideo"]["name"]
         video.mimeType = media_pod_data["originalVideo"]["mimeType"]
         video.size = int(media_pod_data["originalVideo"]["size"])
-        
+
         if "length" in media_pod_data["originalVideo"]:
             video.length = int(media_pod_data["originalVideo"]["length"])
 
@@ -50,10 +51,14 @@ class ProtobufConverter:
                 processed_video.length = int(media_pod_data["processedVideo"]["length"])
 
             if "audios" in media_pod_data["processedVideo"]:
-                processed_video.audios.extend(media_pod_data["processedVideo"]["audios"])
+                processed_video.audios.extend(
+                    media_pod_data["processedVideo"]["audios"]
+                )
 
             if "subtitles" in media_pod_data["processedVideo"]:
-                processed_video.subtitles.extend(media_pod_data["processedVideo"]["subtitles"])
+                processed_video.subtitles.extend(
+                    media_pod_data["processedVideo"]["subtitles"]
+                )
 
             if "ass" in media_pod_data["processedVideo"]:
                 processed_video.ass = media_pod_data["processedVideo"]["ass"]
@@ -70,11 +75,19 @@ class ProtobufConverter:
         configuration.subtitleColor = media_pod_data["configuration"]["subtitleColor"]
         configuration.subtitleBold = media_pod_data["configuration"]["subtitleBold"]
         configuration.subtitleItalic = media_pod_data["configuration"]["subtitleItalic"]
-        configuration.subtitleUnderline = media_pod_data["configuration"]["subtitleUnderline"]
-        configuration.subtitleOutlineColor = media_pod_data["configuration"]["subtitleOutlineColor"]
-        configuration.subtitleOutlineThickness = media_pod_data["configuration"]["subtitleOutlineThickness"]
+        configuration.subtitleUnderline = media_pod_data["configuration"][
+            "subtitleUnderline"
+        ]
+        configuration.subtitleOutlineColor = media_pod_data["configuration"][
+            "subtitleOutlineColor"
+        ]
+        configuration.subtitleOutlineThickness = media_pod_data["configuration"][
+            "subtitleOutlineThickness"
+        ]
         configuration.subtitleShadow = media_pod_data["configuration"]["subtitleShadow"]
-        configuration.subtitleShadowColor = media_pod_data["configuration"]["subtitleShadowColor"]
+        configuration.subtitleShadowColor = media_pod_data["configuration"][
+            "subtitleShadowColor"
+        ]
         configuration.format = media_pod_data["configuration"]["format"]
 
         configuration.IsInitialized()
