@@ -89,6 +89,7 @@ class ProtobufConverter:
             "subtitleShadowColor"
         ]
         configuration.format = media_pod_data["configuration"]["format"]
+        configuration.split = media_pod_data["configuration"]["split"]
 
         configuration.IsInitialized()
 

@@ -3,9 +3,9 @@
 include .env
 export $(shell sed 's/=.*//' .env)
 
-DOCKER_COMPOSE = docker compose -p $(BASE_PROJECT_NAME)
+DOCKER_COMPOSE = docker compose -p $(ROOT_PROJECT_NAME)
 
-CONTAINER_SE := $(shell docker container ls -f "name=$(BASE_PROJECT_NAME)-subtitle-incrustator" -q)
+CONTAINER_SE := $(shell docker container ls -f "name=$(ROOT_PROJECT_NAME)-subtitle-incrustator" -q)
 
 SE := docker exec -ti $(CONTAINER_SE)
 
