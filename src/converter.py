@@ -13,6 +13,7 @@ class ProtobufConverter:
         media_pod.userUuid = media_pod_data["userUuid"]
 
         video = Video()
+        video.uuid = media_pod_data["originalVideo"]["uuid"]
         video.name = media_pod_data["originalVideo"]["name"]
         video.mimeType = media_pod_data["originalVideo"]["mimeType"]
         video.size = int(media_pod_data["originalVideo"]["size"])
@@ -37,6 +38,7 @@ class ProtobufConverter:
 
         if "processedVideo" in media_pod_data:
             processed_video = Video()
+            processed_video.uuid = media_pod_data["processedVideo"]["uuid"]
 
             if "name" in media_pod_data["processedVideo"]:
                 processed_video.name = media_pod_data["processedVideo"]["name"]
@@ -68,6 +70,17 @@ class ProtobufConverter:
 
             processed_video.IsInitialized()
             media_pod.processedVideo.CopyFrom(processed_video)
+
+        if "finalVideo" in media_pod_data:
+            for video in media_pod_data['finalVideo']:
+                final_video = Video()
+                final_video.uuid = video['uuid']
+                final_video.name = video['name']
+                final_video.mimeType = video['mimeType']
+                final_video.size = int(video['size'])
+                final_video.length = int(video['length'])
+                final_video.IsInitialized()
+                media_pod.finalVideo.append(final_video)
 
         configuration = Configuration()
         configuration.subtitleFont = media_pod_data["configuration"]["subtitleFont"]
