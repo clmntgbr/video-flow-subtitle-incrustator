@@ -72,13 +72,13 @@ class ProtobufConverter:
             media_pod.processedVideo.CopyFrom(processed_video)
 
         if "finalVideo" in media_pod_data:
-            for video in media_pod_data['finalVideo']:
+            for video in media_pod_data["finalVideo"]:
                 final_video = Video()
-                final_video.uuid = video['uuid']
-                final_video.name = video['name']
-                final_video.mimeType = video['mimeType']
-                final_video.size = int(video['size'])
-                final_video.length = int(video['length'])
+                final_video.uuid = video["uuid"]
+                final_video.name = video["name"]
+                final_video.mimeType = video["mimeType"]
+                final_video.size = int(video["size"])
+                final_video.length = int(video["length"])
                 final_video.IsInitialized()
                 media_pod.finalVideo.append(final_video)
 
