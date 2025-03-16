@@ -11,6 +11,9 @@ class ProtobufConverter:
         media_pod = MediaPod()
         media_pod.uuid = media_pod_data["uuid"]
         media_pod.userUuid = media_pod_data["userUuid"]
+        
+        if "frame" in media_pod_data:
+            media_pod.frame = media_pod_data["frame"]
 
         video = Video()
         video.uuid = media_pod_data["originalVideo"]["uuid"]
